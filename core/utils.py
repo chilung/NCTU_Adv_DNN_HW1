@@ -4,9 +4,12 @@ import sys
 import time
 import logging
 
-os.popen('stty size', 'r').read().split()
-_, term_width = os.popen('stty size', 'r').read().split()
-term_width = int(term_width)
+#_, term_width = os.popen('stty size', '').read().split()
+print(os.popen('stty size', 'r').read())
+print(os.popen('stty size', 'r').read().split())
+#_, term_width = os.popen('stty size', 'r').read().split()
+#term_width = int(term_width)
+term_width =80
 
 TOTAL_BAR_LENGTH = 40.
 last_time = time.time()

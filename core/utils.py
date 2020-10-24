@@ -1,104 +1,138 @@
-from __future__ import print_function
-import os
-import sys
-import time
-import logging
-
-_, term_width = os.popen('stty size', 'r').read().split()
-term_width = int(term_width)
-
-TOTAL_BAR_LENGTH = 40.
-last_time = time.time()
-begin_time = last_time
-
-
-def progress_bar(current, total, msg=None):
-    global last_time, begin_time
-    if current == 0:
-        begin_time = time.time()  # Reset for new bar.
-
-    cur_len = int(TOTAL_BAR_LENGTH * current / total)
-    rest_len = int(TOTAL_BAR_LENGTH - cur_len) - 1
-
-    sys.stdout.write(' [')
-    for i in range(cur_len):
-        sys.stdout.write('=')
-    sys.stdout.write('>')
-    for i in range(rest_len):
-        sys.stdout.write('.')
-    sys.stdout.write(']')
-
-    cur_time = time.time()
-    step_time = cur_time - last_time
-    last_time = cur_time
-    tot_time = cur_time - begin_time
-
-    L = []
-    L.append('  Step: %s' % format_time(step_time))
-    L.append(' | Tot: %s' % format_time(tot_time))
-    if msg:
-        L.append(' | ' + msg)
-
-    msg = ''.join(L)
-    sys.stdout.write(msg)
-    for i in range(term_width - int(TOTAL_BAR_LENGTH) - len(msg) - 3):
-        sys.stdout.write(' ')
-
-    # Go back to the center of the bar.
-    for i in range(term_width - int(TOTAL_BAR_LENGTH / 2)):
-        sys.stdout.write('\b')
-    sys.stdout.write(' %d/%d ' % (current + 1, total))
-
-    if current < total - 1:
-        sys.stdout.write('\r')
-    else:
-        sys.stdout.write('\n')
-    sys.stdout.flush()
-
-
-def format_time(seconds):
-    days = int(seconds / 3600 / 24)
-    seconds = seconds - days * 3600 * 24
-    hours = int(seconds / 3600)
-    seconds = seconds - hours * 3600
-    minutes = int(seconds / 60)
-    seconds = seconds - minutes * 60
-    secondsf = int(seconds)
-    seconds = seconds - secondsf
-    millis = int(seconds * 1000)
-
-    f = ''
-    i = 1
-    if days > 0:
-        f += str(days) + 'D'
-        i += 1
-    if hours > 0 and i <= 2:
-        f += str(hours) + 'h'
-        i += 1
-    if minutes > 0 and i <= 2:
-        f += str(minutes) + 'm'
-        i += 1
-    if secondsf > 0 and i <= 2:
-        f += str(secondsf) + 's'
-        i += 1
-    if millis > 0 and i <= 2:
-        f += str(millis) + 'ms'
-        i += 1
-    if f == '':
-        f = '0ms'
-    return f
-
-
-def init_log(output_dir):
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(asctime)s %(message)s',
-                        datefmt='%Y%m%d-%H:%M:%S',
-                        filename=os.path.join(output_dir, 'log.log'),
-                        filemode='w')
-    console = logging.StreamHandler()
-    console.setLevel(logging.INFO)
-    logging.getLogger('').addHandler(console)
-    return logging
-
-if __name__ == '__main__':
-    pass
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from __future__ import print_function\n",
+    "import os\n",
+    "import sys\n",
+    "import time\n",
+    "import logging\n",
+    "\n",
+    "os.popen('stty size', 'r').read().split()\n",
+    "_, term_width = os.popen('stty size', 'r').read().split()\n",
+    "term_width = int(term_width)\n",
+    "\n",
+    "TOTAL_BAR_LENGTH = 40.\n",
+    "last_time = time.time()\n",
+    "begin_time = last_time\n",
+    "\n",
+    "\n",
+    "def progress_bar(current, total, msg=None):\n",
+    "    global last_time, begin_time\n",
+    "    if current == 0:\n",
+    "        begin_time = time.time()  # Reset for new bar.\n",
+    "\n",
+    "    cur_len = int(TOTAL_BAR_LENGTH * current / total)\n",
+    "    rest_len = int(TOTAL_BAR_LENGTH - cur_len) - 1\n",
+    "\n",
+    "    sys.stdout.write(' [')\n",
+    "    for i in range(cur_len):\n",
+    "        sys.stdout.write('=')\n",
+    "    sys.stdout.write('>')\n",
+    "    for i in range(rest_len):\n",
+    "        sys.stdout.write('.')\n",
+    "    sys.stdout.write(']')\n",
+    "\n",
+    "    cur_time = time.time()\n",
+    "    step_time = cur_time - last_time\n",
+    "    last_time = cur_time\n",
+    "    tot_time = cur_time - begin_time\n",
+    "\n",
+    "    L = []\n",
+    "    L.append('  Step: %s' % format_time(step_time))\n",
+    "    L.append(' | Tot: %s' % format_time(tot_time))\n",
+    "    if msg:\n",
+    "        L.append(' | ' + msg)\n",
+    "\n",
+    "    msg = ''.join(L)\n",
+    "    sys.stdout.write(msg)\n",
+    "    for i in range(term_width - int(TOTAL_BAR_LENGTH) - len(msg) - 3):\n",
+    "        sys.stdout.write(' ')\n",
+    "\n",
+    "    # Go back to the center of the bar.\n",
+    "    for i in range(term_width - int(TOTAL_BAR_LENGTH / 2)):\n",
+    "        sys.stdout.write('\\b')\n",
+    "    sys.stdout.write(' %d/%d ' % (current + 1, total))\n",
+    "\n",
+    "    if current < total - 1:\n",
+    "        sys.stdout.write('\\r')\n",
+    "    else:\n",
+    "        sys.stdout.write('\\n')\n",
+    "    sys.stdout.flush()\n",
+    "\n",
+    "\n",
+    "def format_time(seconds):\n",
+    "    days = int(seconds / 3600 / 24)\n",
+    "    seconds = seconds - days * 3600 * 24\n",
+    "    hours = int(seconds / 3600)\n",
+    "    seconds = seconds - hours * 3600\n",
+    "    minutes = int(seconds / 60)\n",
+    "    seconds = seconds - minutes * 60\n",
+    "    secondsf = int(seconds)\n",
+    "    seconds = seconds - secondsf\n",
+    "    millis = int(seconds * 1000)\n",
+    "\n",
+    "    f = ''\n",
+    "    i = 1\n",
+    "    if days > 0:\n",
+    "        f += str(days) + 'D'\n",
+    "        i += 1\n",
+    "    if hours > 0 and i <= 2:\n",
+    "        f += str(hours) + 'h'\n",
+    "        i += 1\n",
+    "    if minutes > 0 and i <= 2:\n",
+    "        f += str(minutes) + 'm'\n",
+    "        i += 1\n",
+    "    if secondsf > 0 and i <= 2:\n",
+    "        f += str(secondsf) + 's'\n",
+    "        i += 1\n",
+    "    if millis > 0 and i <= 2:\n",
+    "        f += str(millis) + 'ms'\n",
+    "        i += 1\n",
+    "    if f == '':\n",
+    "        f = '0ms'\n",
+    "    return f\n",
+    "\n",
+    "\n",
+    "def init_log(output_dir):\n",
+    "    logging.basicConfig(level=logging.DEBUG,\n",
+    "                        format='%(asctime)s %(message)s',\n",
+    "                        datefmt='%Y%m%d-%H:%M:%S',\n",
+    "                        filename=os.path.join(output_dir, 'log.log'),\n",
+    "                        filemode='w')\n",
+    "    console = logging.StreamHandler()\n",
+    "    console.setLevel(logging.INFO)\n",
+    "    logging.getLogger('').addHandler(console)\n",
+    "    return logging\n",
+    "\n",
+    "if __name__ == '__main__':\n",
+    "    pass\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

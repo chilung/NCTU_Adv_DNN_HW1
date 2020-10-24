@@ -4,9 +4,6 @@ import sys
 import time
 import logging
 
-#_, term_width = os.popen('stty size', '').read().split()
-print(os.popen('stty size', 'r').read())
-print(os.popen('stty size', 'r').read().split())
 #_, term_width = os.popen('stty size', 'r').read().split()
 #term_width = int(term_width)
 term_width =80

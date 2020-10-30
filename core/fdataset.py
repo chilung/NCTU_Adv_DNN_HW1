@@ -1,5 +1,5 @@
 import numpy as np
-import scipy.misc
+# import scipy.misc
 import imageio
 import os
 import pandas as pd

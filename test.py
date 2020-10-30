@@ -7,10 +7,7 @@ from core import model, dataset, fdataset
 from core.utils import progress_bar
 import pandas as pd
     
-#os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
-os.environ['CUDA_VISIBLE_DEVICES'] = ''
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-print('device = {}'.format(device))
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
 if not test_model:
     raise NameError('please set the test_model file to choose the checkpoint!')
 # read dataset
@@ -22,10 +19,9 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=1,
                                          shuffle=False, num_workers=8, drop_last=False)
 # define model
 net = model.attention_net(topN=PROPOSAL_NUM)
-ckpt = torch.load(test_model, map_location='cpu')
+ckpt = torch.load(test_model)
 net.load_state_dict(ckpt['net_state_dict'])
-net.to(device)
-# net = net.cuda()
+net = net.cuda()
 net = DataParallel(net)
 creterion = torch.nn.CrossEntropyLoss()
 
@@ -37,7 +33,7 @@ net.eval()
 
 #for i, data in enumerate(trainloader):
 #    with torch.no_grad():
-#        img, label = data[0].to(device), data[1].to(device)
+#        img, label = data[0].cuda(), data[1].cuda()
 #        batch_size = img.size(0)
 #        _, concat_logits, _, _, _ = net(img)
 #        # calculate loss
@@ -61,7 +57,7 @@ total = 0
 pred_results = []
 for i, data in enumerate(testloader):
     with torch.no_grad():
-        img, label = data[0].to(device), data[1].to(device)
+        img, label = data[0].cuda(), data[1].cuda()
         batch_size = img.size(0)
         _, concat_logits, _, _, _ = net(img)
         # calculate loss

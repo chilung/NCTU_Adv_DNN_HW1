@@ -17,10 +17,10 @@ logging = init_log(save_dir)
 _print = logging.info
 
 # read dataset
-trainset = dataset.CUB(root='./CUB_200_2011', is_train=True, data_len=None)
+trainset = dataset.HW1(root='./cs-t0828-2020-hw1', is_train=True, data_len=None)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=BATCH_SIZE,
                                           shuffle=True, num_workers=8, drop_last=False)
-testset = dataset.CUB(root='./CUB_200_2011', is_train=False, data_len=None)
+testset = dataset.HW1(root='./cs-t0828-2020-hw1', is_train=False, data_len=None)
 testloader = torch.utils.data.DataLoader(testset, batch_size=BATCH_SIZE,
                                          shuffle=False, num_workers=8, drop_last=False)
 # define model

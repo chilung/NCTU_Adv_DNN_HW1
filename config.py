@@ -6,7 +6,7 @@ INPUT_SIZE = (448, 448)  # (w, h)
 LR = 0.001
 WD = 1e-4
 SAVE_FREQ = 1
-resume = './models/20201031_005137/149.ckpt'
-test_model = './models/20201031_005137/140.ckpt'
+resume = './models/20201031_142430/166.ckpt'
+test_model = './models/20201031_142430/166.ckpt'
 save_dir = './models/'
 

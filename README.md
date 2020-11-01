@@ -1,4 +1,4 @@
-# NTS-Net
+# Selected Topics in Visual Recognition using Deep Learning Homework 1
 
 This is a PyTorch implementation of the ECCV2018 paper "Learning to Navigate for Fine-grained Classification" (Ze Yang, Tiange Luo, Dong Wang, Zhiqiang Hu, Jun Gao, Liwei Wang).
 

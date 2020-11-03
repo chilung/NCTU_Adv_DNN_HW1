@@ -41,10 +41,12 @@ raw_optimizer = torch.optim.SGD(raw_parameters, lr=LR, momentum=0.9, weight_deca
 concat_optimizer = torch.optim.SGD(concat_parameters, lr=LR, momentum=0.9, weight_decay=WD)
 part_optimizer = torch.optim.SGD(part_parameters, lr=LR, momentum=0.9, weight_decay=WD)
 partcls_optimizer = torch.optim.SGD(partcls_parameters, lr=LR, momentum=0.9, weight_decay=WD)
-schedulers = [MultiStepLR(raw_optimizer, milestones=[60, 100], gamma=0.1),
-              MultiStepLR(concat_optimizer, milestones=[60, 100], gamma=0.1),
-              MultiStepLR(part_optimizer, milestones=[60, 100], gamma=0.1),
-              MultiStepLR(partcls_optimizer, milestones=[60, 100], gamma=0.1)]
+#milestones=[60,100]
+milestones=[5]
+schedulers = [MultiStepLR(raw_optimizer, milestones=milestones, gamma=0.1),
+              MultiStepLR(concat_optimizer, milestones=milestones, gamma=0.1),
+              MultiStepLR(part_optimizer, milestones=milestones, gamma=0.1),
+              MultiStepLR(partcls_optimizer, milestones=milestones, gamma=0.1)]
 net = net.cuda()
 net = DataParallel(net)
 
@@ -54,6 +56,16 @@ for epoch in range(start_epoch, 500):
 
     # begin training
     _print('--' * 50)
+    print('learning rate: ', end='')
+    for param_group in raw_optimizer.param_groups:
+        print(param_group['lr'], end=' ')
+    for param_group in concat_optimizer.param_groups:
+        print(param_group['lr'], end=' ')
+    for param_group in part_optimizer.param_groups:
+        print(param_group['lr'], end=' ')
+    for param_group in partcls_optimizer.param_groups:
+        print(param_group['lr'])
+
     net.train()
     for i, data in enumerate(trainloader):
         img, label = data[0].cuda(), data[1].cuda()

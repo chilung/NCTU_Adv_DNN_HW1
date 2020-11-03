@@ -172,5 +172,5 @@ def accuracy_log(f_name):
     
     return
 
-accuracy_log("./models/20201101_142159/train_test.log")
+#accuracy_log("./models/20201101_142159/train_test.log")
 

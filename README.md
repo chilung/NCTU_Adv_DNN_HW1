@@ -14,14 +14,16 @@ year = {2018}
 https://www.kaggle.com/t/14e99b9514d74996b6b04df4fed0ed19
 
 ## Installation
-``conda install -c conda-forge jupyterlab
+<pre><code>
+conda install -c conda-forge jupyterlab
 conda install -c anaconda git
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 conda install -c menpo imageio
 conda install -c anaconda pandas
 conda install -c conda-forge kaggle
 
-git clone https://github.com/chilung/NCTU_Adv_DNN_HW1.git``
+git clone https://github.com/chilung/NCTU_Adv_DNN_HW1.git
+</code></pre>
 
 ## Datasets
 Download the dataset from kaggle using the command:

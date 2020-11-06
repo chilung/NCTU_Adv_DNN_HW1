@@ -1,4 +1,4 @@
-# Selected Topics in Visual Recognition using Deep Learning Homework 1
+# Car Brand Classification
 
 This is a PyTorch implementation for the homwwork of a class: "Selected Topics in Visual Recognition using Deep Learning".
 I refer the ECCV2018 paper "Learning to Navigate for Fine-grained Classification" and its implementation.
@@ -9,6 +9,9 @@ title = {Learning to Navigate for Fine-grained Classification},
 booktitle = {ECCV},
 year = {2018}
 }
+
+## Kaggle competition link
+https://www.kaggle.com/t/14e99b9514d74996b6b04df4fed0ed19
 
 ## Setting environment
 ``conda install -c conda-forge jupyterlab

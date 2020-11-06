@@ -20,6 +20,7 @@ conda install -c anaconda git
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 conda install -c menpo imageio
 conda install -c anaconda pandas
+conda install -c bioconda p7zip
 conda install -c conda-forge kaggle
 
 git clone https://github.com/chilung/NCTU_Adv_DNN_HW1.git
@@ -27,9 +28,12 @@ git clone https://github.com/chilung/NCTU_Adv_DNN_HW1.git
 
 ## Datasets
 Download the dataset from kaggle using the command:
+<pre><code>kaggle competitions download -c cs-t0828-2020-hw1
+</code></pre>
 
-kaggle competitions download -c cs-t0828-2020-hw1
-unzip the dataset and put in the root directory of the project.
+unzip the dataset and put in the root directory of the project:
+<pre><code>7za x cs-t0828-2020-hw1.zip
+</code></pre>
 
 ## Test the model
 If you want to test the model, just run ``python test.py``. You need to specify the ``test_model`` in ``config.py`` to choose the checkpoint model for testing.

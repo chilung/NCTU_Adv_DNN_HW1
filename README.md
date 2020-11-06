@@ -35,6 +35,13 @@ unzip the dataset and put in the root directory of the project:
 <pre><code>7za x cs-t0828-2020-hw1.zip
 </code></pre>
 
+<pre><code>+- testing_data/
+| +- testing_data/testing_data
++- training_data/
+| +- training_data/training_data/
++- training_labels.csv
+</code></pre>
+
 ## Test the model
 If you want to test the model, just run ``python test.py``. You need to specify the ``test_model`` in ``config.py`` to choose the checkpoint model for testing.
 

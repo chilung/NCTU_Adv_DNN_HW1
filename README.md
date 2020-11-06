@@ -13,7 +13,7 @@ year = {2018}
 ## Kaggle competition link
 https://www.kaggle.com/t/14e99b9514d74996b6b04df4fed0ed19
 
-## Setting environment
+## Installation
 ``conda install -c conda-forge jupyterlab
 conda install -c anaconda git
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch

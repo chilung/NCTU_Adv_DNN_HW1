@@ -120,6 +120,14 @@ for epoch in range(start_epoch, 500):
                 train_loss,
                 train_acc,
                 total))
+	with open('progress.txt', 'a') as f:
+            print('epoch:{} - train loss: {:.3f} and train acc: {:.3f} total sample: {}'.format(
+            	epoch,
+            	train_loss,
+            	train_acc,
+            	total),
+	    file=f)
+            f.close()
 
 	# evaluate on test set
         test_loss = 0
@@ -147,6 +155,14 @@ for epoch in range(start_epoch, 500):
                 test_loss,
                 test_acc,
                 total))
+	with open('progress.txt', 'a') as f:
+            print('epoch:{} - test loss: {:.3f} and train acc: {:.3f} total sample: {}'.format(
+            	epoch,
+            	train_loss,
+            	train_acc,
+            	total),
+	    file=f)
+            f.close()
 
 	# save model
         net_state_dict = net.module.state_dict()

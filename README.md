@@ -35,6 +35,7 @@ unzip the dataset and put in the root directory of the project:
 <pre><code>7za x cs-t0828-2020-hw1.zip
 </code></pre>
 
+In the project root directory, you will get:
 <pre><code>+- testing_data/
 | +- testing_data/testing_data
 +- training_data/

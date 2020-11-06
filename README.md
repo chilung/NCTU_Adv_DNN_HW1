@@ -19,7 +19,9 @@ conda install -c anaconda git
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 conda install -c menpo imageio
 conda install -c anaconda pandas
-conda install -c conda-forge kaggle``
+conda install -c conda-forge kaggle
+
+git clone https://github.com/chilung/NCTU_Adv_DNN_HW1.git``
 
 ## Datasets
 Download the dataset from kaggle using the command:

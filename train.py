@@ -120,7 +120,7 @@ for epoch in range(start_epoch, 500):
                 train_loss,
                 train_acc,
                 total))
-	with open('progress.txt', 'a') as f:
+        with open('progress.txt', 'a') as f:
             print('epoch:{} - train loss: {:.3f} and train acc: {:.3f} total sample: {}'.format(
             	epoch,
             	train_loss,
@@ -155,7 +155,7 @@ for epoch in range(start_epoch, 500):
                 test_loss,
                 test_acc,
                 total))
-	with open('progress.txt', 'a') as f:
+        with open('progress.txt', 'a') as f:
             print('epoch:{} - test loss: {:.3f} and train acc: {:.3f} total sample: {}'.format(
             	epoch,
             	train_loss,

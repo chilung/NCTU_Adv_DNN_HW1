@@ -11,12 +11,12 @@ year = {2018}
 }
 
 ## Setting environment
-conda install -c conda-forge jupyterlab
+``conda install -c conda-forge jupyterlab
 conda install -c anaconda git
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 conda install -c menpo imageio
 conda install -c anaconda pandas
-conda install -c conda-forge kaggle
+conda install -c conda-forge kaggle``
 
 ## Datasets
 Download the dataset from kaggle using the command:

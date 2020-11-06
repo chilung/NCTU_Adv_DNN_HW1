@@ -26,6 +26,7 @@ git clone https://github.com/chilung/NCTU_Adv_DNN_HW1.git
 
 ## Datasets
 Download the dataset from kaggle using the command:
+
 kaggle competitions download -c cs-t0828-2020-hw1
 unzip the dataset and put in the root directory of the project.
 

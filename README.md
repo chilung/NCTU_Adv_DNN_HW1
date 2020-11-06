@@ -3,12 +3,13 @@
 This is a PyTorch implementation for the homwwork of a class: "Selected Topics in Visual Recognition using Deep Learning".
 I refer the ECCV2018 paper "Learning to Navigate for Fine-grained Classification" and its implementation.
 Here is a citation:
-@inproceedings{Yang2018Learning,
+<pre><code>@inproceedings{Yang2018Learning,
 author = {Yang, Ze and Luo, Tiange and Wang, Dong and Hu, Zhiqiang and Gao, Jun and Wang, Liwei},
 title = {Learning to Navigate for Fine-grained Classification},
 booktitle = {ECCV},
 year = {2018}
 }
+</code></pre>
 
 ## Kaggle competition link
 https://www.kaggle.com/t/14e99b9514d74996b6b04df4fed0ed19

@@ -50,4 +50,7 @@ If you want to test the model, just run ``python test.py``. You need to specify 
 If you want to train the model, just run ``python train.py``. You may need to change the configurations in ``config.py``. The parameter ``PROPOSAL_NUM`` is ``M`` in the original paper and the parameter ``CAT_NUM`` is ``K`` in the original paper. During training, the log file and checkpoint file will be saved in ``save_dir`` directory. You can change the parameter ``resume`` to choose the checkpoint model to resume.
 
 ## Model
-We also provide the checkpoint model trained by ourselves, you can download it from [here](https://drive.google.com/file/d/1F-eKqPRjlya5GH2HwTlLKNSPEUaxCu9H/view?usp=sharing). If you test on our provided model, you will get a 87.6% test accuracy.
+I also provide the checkpoint model trained with submission scored 0.92580
+
+https://drive.google.com/file/d/1bZ_m1sFLOycL5tqfe92fZIjJtx8MHHDd/view?usp=sharing
+

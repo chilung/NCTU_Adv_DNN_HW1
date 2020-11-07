@@ -1,6 +1,6 @@
 # Car Brand Classification
 
-This is a PyTorch implementation for the homwwork of a class: "Selected Topics in Visual Recognition using Deep Learning".
+This is a PyTorch implementation for the homework of a class: "Selected Topics in Visual Recognition using Deep Learning".
 I refer the ECCV2018 paper "Learning to Navigate for Fine-grained Classification" and its implementation.
 Here is a citation:
 <pre><code>@inproceedings{Yang2018Learning,

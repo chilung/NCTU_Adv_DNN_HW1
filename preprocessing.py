@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 
 import os
@@ -11,7 +11,7 @@ import numpy as np
 import torch
 
 
-# In[3]:
+# In[2]:
 
 
 root_path = './cs-t0828-2020-hw1'
@@ -19,7 +19,7 @@ train_src = 'training_data/training_data'
 test_src = 'testing_data/testing_data'
 
 
-# In[4]:
+# In[3]:
 
 
 print('\n==> generate train file list: {}'.format('images.csv'))
@@ -38,7 +38,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'images.csv'), index = False)
 
 
-# In[5]:
+# In[4]:
 
 
 print('\n==> generate test file list: {}'.format('test_images.csv'))
@@ -57,7 +57,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'test_images.csv'), index = False)
 
 
-# In[6]:
+# In[5]:
 
 
 training_labels_csv_filename = 'training_labels.csv'
@@ -68,7 +68,7 @@ mycar.sort()
 #print(mycar)
 
 
-# In[7]:
+# In[6]:
 
 
 brands = list(set([img_brand for img_idx, img_brand in mycar]))
@@ -81,7 +81,7 @@ class_label = [[idx, brand] for idx, brand in enumerate(brands)]
 #print(class_label)
 
 
-# In[8]:
+# In[7]:
 
 
 print('\n==> generate class file, containing class id and class name: {}'.format('class.csv'))
@@ -90,7 +90,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'class.csv'), index = False)
 
 
-# In[9]:
+# In[8]:
 
 
 from collections import OrderedDict 
@@ -106,7 +106,7 @@ for idx, brand in class_label:
 #print(id_to_name)
 
 
-# In[10]:
+# In[9]:
 
 
 print('\n==> generate train label file and transfer train label name to label id: {}'.format('image_class_labels.csv'))
@@ -118,7 +118,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'image_class_labels.csv'), index = False)
 
 
-# In[11]:
+# In[10]:
 
 
 print('\n==> generate train / train phase test split with ratio train/tets = 7/1: {}'.format('train_test_split.csv'))
@@ -135,7 +135,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'train_test_split.csv'), index = False)
 
 
-# In[12]:
+# In[11]:
 
 
 def accuracy_log(f_name):
@@ -176,7 +176,7 @@ def accuracy_log(f_name):
 accuracy_log("./models/20201103_235321/train_test.log")
 
 
-# In[16]:
+# In[12]:
 
 
 def acc_ckpt(dir_name):
@@ -204,6 +204,18 @@ def acc_ckpt(dir_name):
     return
 
 acc_ckpt("./models/20201103_235321")
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

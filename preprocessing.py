@@ -1,16 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[12]:
+# In[2]:
 
 
 import os
 import re
 import pandas as pd
 import numpy as np
+import torch
 
 
-# In[13]:
+# In[3]:
 
 
 root_path = './cs-t0828-2020-hw1'
@@ -18,7 +19,7 @@ train_src = 'training_data/training_data'
 test_src = 'testing_data/testing_data'
 
 
-# In[14]:
+# In[4]:
 
 
 print('\n==> generate train file list: {}'.format('images.csv'))
@@ -37,7 +38,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'images.csv'), index = False)
 
 
-# In[15]:
+# In[5]:
 
 
 print('\n==> generate test file list: {}'.format('test_images.csv'))
@@ -56,7 +57,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'test_images.csv'), index = False)
 
 
-# In[16]:
+# In[6]:
 
 
 training_labels_csv_filename = 'training_labels.csv'
@@ -67,7 +68,7 @@ mycar.sort()
 #print(mycar)
 
 
-# In[17]:
+# In[7]:
 
 
 brands = list(set([img_brand for img_idx, img_brand in mycar]))
@@ -80,7 +81,7 @@ class_label = [[idx, brand] for idx, brand in enumerate(brands)]
 #print(class_label)
 
 
-# In[18]:
+# In[8]:
 
 
 print('\n==> generate class file, containing class id and class name: {}'.format('class.csv'))
@@ -89,7 +90,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'class.csv'), index = False)
 
 
-# In[19]:
+# In[9]:
 
 
 from collections import OrderedDict 
@@ -105,7 +106,7 @@ for idx, brand in class_label:
 #print(id_to_name)
 
 
-# In[20]:
+# In[10]:
 
 
 print('\n==> generate train label file and transfer train label name to label id: {}'.format('image_class_labels.csv'))
@@ -117,7 +118,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'image_class_labels.csv'), index = False)
 
 
-# In[21]:
+# In[11]:
 
 
 print('\n==> generate train / train phase test split with ratio train/tets = 7/1: {}'.format('train_test_split.csv'))
@@ -134,7 +135,7 @@ print(dfObj)
 dfObj.to_csv(os.path.join(root_path, 'train_test_split.csv'), index = False)
 
 
-# In[23]:
+# In[12]:
 
 
 def accuracy_log(f_name):
@@ -172,5 +173,41 @@ def accuracy_log(f_name):
     
     return
 
-#accuracy_log("./models/20201101_142159/train_test.log")
+accuracy_log("./models/20201103_235321/train_test.log")
+
+
+# In[16]:
+
+
+def acc_ckpt(dir_name):
+
+    ckpt_list = os.listdir(dir_name)
+    print('model check list: {}'.format(ckpt_list))
+    
+    epoch= []
+    train_acc= []
+    test_acc= []
+
+    for ckpt_file in ckpt_list:
+        if ckpt_file.find('.ckpt') != -1: 
+            ckpt = torch.load(os.path.join(dir_name, ckpt_file))
+            print('epoch: {}, train_acc: {}, test_acc: {}'.format(ckpt['epoch'], ckpt['train_acc'], ckpt['test_acc']))
+            
+            epoch.append(ckpt['epoch'])
+            train_acc.append(ckpt['train_acc'])
+            test_acc.append(ckpt['test_acc'])
+
+    sorted_idx = np.argsort(test_acc)[::-1]
+    print([test_acc[i] for i in sorted_idx])
+    print([epoch[i] for i in sorted_idx])
+
+    return
+
+acc_ckpt("./models/20201103_235321")
+
+
+# In[ ]:
+
+
+
 

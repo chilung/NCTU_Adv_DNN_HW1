@@ -44,9 +44,9 @@ In the project root directory, you will get:
 </code></pre>
 
 ## Reproducing the Submission
-### Download submitted pre-trained model
+1. Download submitted pre-trained model
 I provide the checkpoint model trained with submission scored 0.92580 from [here](https://drive.google.com/file/d/1bZ_m1sFLOycL5tqfe92fZIjJtx8MHHDd/view?usp=sharing).
-### Produce submission.csv
+2. Produce submission.csv
 You need to specify the ``test_model`` in ``config.py`` to choose the submitted pre-trained model for testing, such as:
 <pre><code>test_model = './pre-trained-scored-0.92580.ckpt'
 </code></pre>

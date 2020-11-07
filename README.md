@@ -43,14 +43,12 @@ In the project root directory, you will get:
 +- training_labels.csv
 </code></pre>
 
+## Model
+I also provide the checkpoint model trained with submission scored 0.92580 from [here](https://drive.google.com/file/d/1bZ_m1sFLOycL5tqfe92fZIjJtx8MHHDd/view?usp=sharing).
+
 ## Test the model
 If you want to test the model, just run ``python test.py``. You need to specify the ``test_model`` in ``config.py`` to choose the checkpoint model for testing.
 
 ## Train the model
 If you want to train the model, just run ``python train.py``. You may need to change the configurations in ``config.py``. The parameter ``PROPOSAL_NUM`` is ``M`` in the original paper and the parameter ``CAT_NUM`` is ``K`` in the original paper. During training, the log file and checkpoint file will be saved in ``save_dir`` directory. You can change the parameter ``resume`` to choose the checkpoint model to resume.
-
-## Model
-I also provide the checkpoint model trained with submission scored 0.92580
-
-https://drive.google.com/file/d/1bZ_m1sFLOycL5tqfe92fZIjJtx8MHHDd/view?usp=sharing
 

@@ -3,7 +3,8 @@ import torch.utils.data
 from torch.nn import DataParallel
 from datetime import datetime
 from torch.optim.lr_scheduler import MultiStepLR
-from config import BATCH_SIZE, PROPOSAL_NUM, SAVE_FREQ, LR, WD, resume, save_dir
+from config import BATCH_SIZE, PROPOSAL_NUM, SAVE_FREQ
+from config import LR, WD, resume, save_dir
 from core import model, dataset
 from core.utils import init_log, progress_bar
 
@@ -17,12 +18,16 @@ logging = init_log(save_dir)
 _print = logging.info
 
 # read dataset
-trainset = dataset.HW1(root='./cs-t0828-2020-hw1', is_train=True, data_len=None)
+trainset = dataset.HW1(root='./cs-t0828-2020-hw1',
+                    is_train=True, data_len=None)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=BATCH_SIZE,
-                                          shuffle=True, num_workers=8, drop_last=False)
-testset = dataset.HW1(root='./cs-t0828-2020-hw1', is_train=False, data_len=None)
+                                          shuffle=True, num_workers=8,
+                                          drop_last=False)
+testset = dataset.HW1(root='./cs-t0828-2020-hw1',
+                    is_train=False, data_len=None)
 testloader = torch.utils.data.DataLoader(testset, batch_size=BATCH_SIZE,
-                                         shuffle=False, num_workers=8, drop_last=False)
+                                         shuffle=False, num_workers=8,
+                                         drop_last=False)
 # define model
 net = model.attention_net(topN=PROPOSAL_NUM)
 if resume:
@@ -37,12 +42,16 @@ part_parameters = list(net.proposal_net.parameters())
 concat_parameters = list(net.concat_net.parameters())
 partcls_parameters = list(net.partcls_net.parameters())
 
-raw_optimizer = torch.optim.SGD(raw_parameters, lr=LR, momentum=0.9, weight_decay=WD)
-concat_optimizer = torch.optim.SGD(concat_parameters, lr=LR, momentum=0.9, weight_decay=WD)
-part_optimizer = torch.optim.SGD(part_parameters, lr=LR, momentum=0.9, weight_decay=WD)
-partcls_optimizer = torch.optim.SGD(partcls_parameters, lr=LR, momentum=0.9, weight_decay=WD)
-milestones=[26, 66]
-#milestones=[5]
+raw_optimizer = torch.optim.SGD(raw_parameters, lr=LR,
+                                momentum=0.9, weight_decay=WD)
+concat_optimizer = torch.optim.SGD(concat_parameters, lr=LR,
+                                   momentum=0.9, weight_decay=WD)
+part_optimizer = torch.optim.SGD(part_parameters, lr=LR,
+                                 momentum=0.9, weight_decay=WD)
+partcls_optimizer = torch.optim.SGD(partcls_parameters, lr=LR,
+                                    momentum=0.9, weight_decay=WD)
+milestones = [26, 66]
+# milestones = [5]
 schedulers = [MultiStepLR(raw_optimizer, milestones=milestones, gamma=0.1),
               MultiStepLR(concat_optimizer, milestones=milestones, gamma=0.1),
               MultiStepLR(part_optimizer, milestones=milestones, gamma=0.1),
@@ -76,8 +85,10 @@ for epoch in range(start_epoch, 500):
         partcls_optimizer.zero_grad()
 
         raw_logits, concat_logits, part_logits, _, top_n_prob = net(img)
-        part_loss = model.list_loss(part_logits.view(batch_size * PROPOSAL_NUM, -1),
-                                    label.unsqueeze(1).repeat(1, PROPOSAL_NUM).view(-1)).view(batch_size, PROPOSAL_NUM)
+        part_loss = model.list_loss(part_logits.view(
+                                    batch_size * PROPOSAL_NUM, -1),
+                                    label.unsqueeze(1).repeat(1,
+                                    PROPOSAL_NUM).view(-1)).view(batch_size, PROPOSAL_NUM)
         raw_loss = creterion(raw_logits, label)
         concat_loss = creterion(concat_logits, label)
         rank_loss = model.ranking_loss(top_n_prob, part_loss)
@@ -122,14 +133,14 @@ for epoch in range(start_epoch, 500):
                 total))
         with open('progress.txt', 'a') as f:
             print('epoch:{} - train loss: {:.3f} and train acc: {:.3f} total sample: {}'.format(
-            	epoch,
-            	train_loss,
-            	train_acc,
-            	total),
-	    file=f)
+                epoch,
+                train_loss,
+                train_acc,
+                total),
+                file=f)
             f.close()
 
-	# evaluate on test set
+    # evaluate on test set
         test_loss = 0
         test_correct = 0
         total = 0
@@ -157,14 +168,14 @@ for epoch in range(start_epoch, 500):
                 total))
         with open('progress.txt', 'a') as f:
             print('epoch:{} - test loss: {:.3f} and train acc: {:.3f} total sample: {}'.format(
-            	epoch,
-            	train_loss,
-            	train_acc,
-            	total),
-	    file=f)
+                epoch,
+                train_loss,
+                train_acc,
+                total),
+                file=f)
             f.close()
 
-	# save model
+    # save model
         net_state_dict = net.module.state_dict()
         if not os.path.exists(save_dir):
             os.mkdir(save_dir)

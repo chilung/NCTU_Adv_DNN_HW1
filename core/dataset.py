@@ -12,23 +12,23 @@ class HW1():
     def __init__(self, root, is_train=True, data_len=None):
         self.root = root
         self.is_train = is_train
-        
+
         img_pd = pd.read_csv(os.path.join(self.root, 'images.csv'))
         label_pd = pd.read_csv(os.path.join(self.root, 'image_class_labels.csv'))
         train_test_pd = pd.read_csv(os.path.join(self.root, 'train_test_split.csv'))
 
         img_name_list = [img_fn for _, img_fn in img_pd.values.tolist()]
-        #print(img_name_list)
+        # print(img_name_list)
         label_list = [label for _, label in label_pd.values.tolist()]
-        #print(label_list)
+        # print(label_list)
         train_test_list = [split for _, split in train_test_pd.values.tolist()]
-        #print(train_test_list)
+        # print(train_test_list)
 
         train_file_list = [x for i, x in zip(train_test_list, img_name_list) if i]
         test_file_list = [x for i, x in zip(train_test_list, img_name_list) if not i]
-        #print(train_file_list)
-        #print(test_file_list)        
-        
+        # print(train_file_list)
+        # print(test_file_list)
+
         if self.is_train:
             self.train_img = [imageio.imread(os.path.join(self.root, 'training_data/training_data', train_file)) for train_file in
                               train_file_list[:data_len]]

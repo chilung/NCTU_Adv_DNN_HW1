@@ -6,17 +6,19 @@ from config import BATCH_SIZE, PROPOSAL_NUM, test_model
 from core import model, dataset, fdataset
 from core.utils import progress_bar
 import pandas as pd
-    
+
 os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
 if not test_model:
     raise NameError('please set the test_model file to choose the checkpoint!')
 # read dataset
-trainset = fdataset.FDATA(root='./cs-t0828-2020-hw1', is_train=True, data_len=None)
+trainset = fdataset.FDATA(root='./cs-t0828-2020-hw1',
+                    is_train=True, data_len=None)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=BATCH_SIZE,
-                                          shuffle=False, num_workers=8, drop_last=False)
-testset = fdataset.FDATA(root='./cs-t0828-2020-hw1', is_train=False, data_len=None)
+                    shuffle=False, num_workers=8, drop_last=False)
+testset = fdataset.FDATA(root='./cs-t0828-2020-hw1',
+                    is_train=False, data_len=None)
 testloader = torch.utils.data.DataLoader(testset, batch_size=1,
-                                         shuffle=False, num_workers=8, drop_last=False)
+                    shuffle=False, num_workers=8, drop_last=False)
 # define model
 net = model.attention_net(topN=PROPOSAL_NUM)
 ckpt = torch.load(test_model)
@@ -31,7 +33,7 @@ train_correct = 0
 total = 0
 net.eval()
 
-#for i, data in enumerate(trainloader):
+# for i, data in enumerate(trainloader):
 #    with torch.no_grad():
 #        img, label = data[0].cuda(), data[1].cuda()
 #        batch_size = img.size(0)
@@ -45,9 +47,10 @@ net.eval()
 #        train_loss += concat_loss.item() * batch_size
 #        progress_bar(i, len(trainloader), 'eval on train set')
 #
-#train_acc = float(train_correct) / total
-#train_loss = train_loss / total
-#print('train set loss: {:.3f} and train set acc: {:.3f} total sample: {}'.format(train_loss, train_acc, total))
+# train_acc = float(train_correct) / total
+# train_loss = train_loss / total
+# print('train set loss: {:.3f} and train set acc: {:.3f} total sample: {}'.format(
+#                    train_loss, train_acc, total))
 
 # evaluate on test set
 test_loss = 0
@@ -68,7 +71,7 @@ for i, data in enumerate(testloader):
         test_correct += torch.sum(concat_predict.data == label.data)
         test_loss += concat_loss.item() * batch_size
         progress_bar(i, len(testloader), 'eval on test set')
-        
+
         pred_results.extend(concat_predict.data.cpu().numpy())
 
 print(pred_results)
@@ -84,7 +87,8 @@ for idx, name in class_name_list:
     id_to_name[idx] = name
 print(id_to_name)
 
-test_img_pd = pd.read_csv(os.path.join('./cs-t0828-2020-hw1', 'test_images.csv'))
+test_img_pd = pd.read_csv(os.path.join('./cs-t0828-2020-hw1',
+                                       'test_images.csv'))
 print(test_img_pd)
 test_img_idx_list = [img_idx for img_idx, _ in test_img_pd.values.tolist()]
 print(test_img_idx_list)
@@ -99,4 +103,3 @@ df = pd.DataFrame(ftest, columns=['id', 'label'])
 df.to_csv('submission.csv', index=False)
 
 print('finishing testing')
-

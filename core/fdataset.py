@@ -12,26 +12,26 @@ class FDATA():
     def __init__(self, root, is_train=True, data_len=None):
         self.root = root
         self.is_train = is_train
-        
+
         img_pd = pd.read_csv(os.path.join(self.root, 'images.csv'))
         label_pd = pd.read_csv(os.path.join(self.root, 'image_class_labels.csv'))
         test_img_pd = pd.read_csv(os.path.join(self.root, 'test_images.csv'))
         test_label_pd = pd.read_csv(os.path.join(self.root, 'test_image_class_labels.csv'))
 
         img_name_list = [img_fn for _, img_fn in img_pd.values.tolist()]
-        #print(img_name_list)
+        # print(img_name_list)
         label_list = [label for _, label in label_pd.values.tolist()]
-        #print(label_list)
+        # print(label_list)
         train_file_list = [x for x in img_name_list]
-        #print(train_file_list)
-        
+        # print(train_file_list)
+
         test_img_name_list = [img_fn for _, img_fn in test_img_pd.values.tolist()]
         print(test_img_name_list)
         test_label_list = [label for _, label in test_label_pd.values.tolist()]
-        #print(test_label_list)
+        # print(test_label_list)
         test_file_list = [x for x in test_img_name_list]
-        #print(test_file_list)
-        
+        # print(test_file_list)
+
         if self.is_train:
             self.train_img = [imageio.imread(os.path.join(self.root, 'training_data/training_data', train_file)) for train_file in
                               train_file_list[:data_len]]
@@ -48,8 +48,8 @@ class FDATA():
                 img = np.stack([img] * 3, 2)
             img = Image.fromarray(img, mode='RGB')
             img = transforms.Resize(INPUT_SIZE, Image.BILINEAR)(img)
-            #img = transforms.Resize((600, 600), Image.BILINEAR)(img)
-            #img = transforms.CenterCrop(INPUT_SIZE)(img)
+            # img = transforms.Resize((600, 600), Image.BILINEAR)(img)
+            # img = transforms.CenterCrop(INPUT_SIZE)(img)
             img = transforms.ToTensor()(img)
             img = transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])(img)
 

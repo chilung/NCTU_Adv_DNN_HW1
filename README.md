@@ -43,7 +43,8 @@ In the project root directory, you will get:
 +- training_labels.csv
 </code></pre>
 
-## Model
+## Reproducing the Submission
+### Model
 I also provide the checkpoint model trained with submission scored 0.92580 from [here](https://drive.google.com/file/d/1bZ_m1sFLOycL5tqfe92fZIjJtx8MHHDd/view?usp=sharing).
 
 ## Test the model

@@ -1,12 +1,12 @@
-# BATCH_SIZE = 16
-BATCH_SIZE = 4
+BATCH_SIZE = 16
+# BATCH_SIZE = 4
 PROPOSAL_NUM = 6
 CAT_NUM = 4
 INPUT_SIZE = (448, 448)  # (w, h)
 LR = 0.001
 WD = 1e-4
 SAVE_FREQ = 1
-resume = './models/20201105_233503/176.ckpt'
+resume = './models/034.ckpt'
 # test_model = './models/20201106_041239/034.ckpt'
-test_model = './models/20201105_233503/176.ckpt'
+test_model = './models/034.ckpt'
 save_dir = './models/'

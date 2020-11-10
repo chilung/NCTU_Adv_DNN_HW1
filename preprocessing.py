@@ -123,7 +123,7 @@ dfObj.to_csv(os.path.join(root_path, 'image_class_labels.csv'), index=False)
 
 print('\n==> generate train / train phase test split with ratio train/tets = 7/1: {}'.format('train_test_split.csv'))
 train_test_split = []
-split_ratio = 1+1
+split_ratio = 4+1
 split = 1
 for idx, class_label in image_class_labels:
     train_test_split.append([idx, 1 if (split % split_ratio) else 0])

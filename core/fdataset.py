@@ -26,7 +26,7 @@ class FDATA():
         # print(train_file_list)
 
         test_img_name_list = [img_fn for _, img_fn in test_img_pd.values.tolist()]
-        print(test_img_name_list)
+        # print(test_img_name_list)
         test_label_list = [label for _, label in test_label_pd.values.tolist()]
         # print(test_label_list)
         test_file_list = [x for x in test_img_name_list]

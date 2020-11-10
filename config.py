@@ -8,5 +8,5 @@ WD = 1e-4
 SAVE_FREQ = 1
 # resume = './models/20201109_043308/pre-trained-scored-0.93680.ckpt'
 resume = ''
-test_model = './models/20201109_043308/pre-trained-scored-0.93680.ckpt'
+test_model = './models/20201110_045404/063.ckpt'
 save_dir = './models/'

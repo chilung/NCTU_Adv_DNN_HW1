@@ -8,6 +8,7 @@ from core.utils import progress_bar
 import pandas as pd
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 if not test_model:
     raise NameError('please set the test_model file to choose the checkpoint!')
 # read dataset
@@ -60,7 +61,7 @@ total = 0
 pred_results = []
 for i, data in enumerate(testloader):
     with torch.no_grad():
-        img, label = data[0].cuda(), data[1].cuda()
+        img, label = data[0].to(device), data[1].to(device)
         batch_size = img.size(0)
         _, concat_logits, _, _, _ = net(img)
         # calculate loss

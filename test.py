@@ -21,7 +21,7 @@ trainloader = torch.utils.data.DataLoader(trainset, batch_size=BATCH_SIZE,
                     shuffle=False, num_workers=8, drop_last=False)
 testset = fdataset.FDATA(root='./cs-t0828-2020-hw1',
                     is_train=False, data_len=None)
-testloader = torch.utils.data.DataLoader(testset, batch_size=1,
+testloader = torch.utils.data.DataLoader(testset, batch_size=BATCH_SIZE,
                     shuffle=False, num_workers=8, drop_last=False)
 # define model
 net = model.attention_net(topN=PROPOSAL_NUM)
@@ -76,6 +76,7 @@ for i, data in enumerate(testloader):
         test_loss += concat_loss.item() * batch_size
         progress_bar(i, len(testloader), 'eval on test set')
 
+        print(concat_predict.data)
         pred_results.extend(concat_predict.data.cpu().numpy())
 
 print(pred_results)

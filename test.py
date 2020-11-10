@@ -76,7 +76,7 @@ for i, data in enumerate(testloader):
         test_loss += concat_loss.item() * batch_size
         progress_bar(i, len(testloader), 'eval on test set')
 
-        print(concat_predict.data)
+        # print(concat_predict.data)
         pred_results.extend(concat_predict.data.cpu().numpy())
 
 print(pred_results)

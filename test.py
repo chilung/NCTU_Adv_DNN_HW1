@@ -24,7 +24,7 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=1,
 net = model.attention_net(topN=PROPOSAL_NUM)
 ckpt = torch.load(test_model)
 net.load_state_dict(ckpt['net_state_dict'])
-net = net.cuda()
+net = net.to(device)
 net = DataParallel(net)
 creterion = torch.nn.CrossEntropyLoss()
 

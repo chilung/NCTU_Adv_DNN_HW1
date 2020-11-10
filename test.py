@@ -27,7 +27,7 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=BATCH_SIZE,
 net = model.attention_net(topN=PROPOSAL_NUM)
 ckpt = torch.load(test_model)
 net.load_state_dict(ckpt['net_state_dict'])
-net = net.to(device)
+net = net.cuda()
 net = DataParallel(net)
 creterion = torch.nn.CrossEntropyLoss()
 
@@ -64,7 +64,7 @@ total = 0
 pred_results = []
 for i, data in enumerate(testloader):
     with torch.no_grad():
-        img, label = data[0].to(device), data[1].to(device)
+        img, label = data[0].cuda(), data[1].cuda()
         batch_size = img.size(0)
         _, concat_logits, _, _, _ = net(img)
         # calculate loss

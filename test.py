@@ -9,6 +9,9 @@ import pandas as pd
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+if torch.cuda.device_count() > 1:
+    print("Number of GPUS:", torch.cuda.device_count(), "GPUs!")
+
 if not test_model:
     raise NameError('please set the test_model file to choose the checkpoint!')
 # read dataset

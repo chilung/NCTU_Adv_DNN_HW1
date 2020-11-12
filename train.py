@@ -51,7 +51,7 @@ part_optimizer = torch.optim.SGD(part_parameters, lr=LR,
                                  momentum=0.9, weight_decay=WD)
 partcls_optimizer = torch.optim.SGD(partcls_parameters, lr=LR,
                                     momentum=0.9, weight_decay=WD)
-milestones = [11, 51]
+milestones = []
 # milestones = [5]
 schedulers = [MultiStepLR(raw_optimizer, milestones=milestones, gamma=0.1),
               MultiStepLR(concat_optimizer, milestones=milestones, gamma=0.1),

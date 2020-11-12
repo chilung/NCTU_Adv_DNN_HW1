@@ -28,4 +28,4 @@ def acc_ckpt(dir_name):
 
     return
 
-acc_ckpt("./models/20201111_012258")
+acc_ckpt("./models/20201112_132148/")

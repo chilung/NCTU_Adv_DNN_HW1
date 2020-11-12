@@ -15,8 +15,9 @@ def acc_ckpt(dir_name):
     for ckpt_file in ckpt_list:
         if ckpt_file.find('.ckpt') != -1:
             ckpt = torch.load(os.path.join(dir_name, ckpt_file))
-            print('epoch: {}, train_acc: {}, test_acc: {}'.format(ckpt['epoch'], ckpt['train_acc'], ckpt['test_acc']))
-
+            print('epoch: {}, train_acc: {}, train_loss: {}, test_acc: {}, test_loss: {}'.format(
+                ckpt['epoch'], ckpt['train_acc'], ckpt['train_loss'], ckpt['test_acc'], ckpt['test_loss']))
+                
             epoch.append(ckpt['epoch'])
             train_acc.append(ckpt['train_acc'])
             test_acc.append(ckpt['test_acc'])
